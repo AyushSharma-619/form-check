@@ -38,13 +38,22 @@ function checkFileSize(filePath,expectedFileSize){
             return "error processing file"
         }
         // returns file size in MegaByte
-        return stats.size/1024*1024
+        return stats.size/(1024*1024)
     })
     
 }
 
 
-function checkEmail(){}
+function checkEmail(email,errorCallback){
+    var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (email !== '' && email.match(emailFormat)) 
+    { 
+        return true; 
+    }
+    else{
+        errorCallback();
+    }
+}
 
 
 function castDataType(){}
