@@ -1,14 +1,47 @@
-var fs = require('fs')
+var fs = require('fs');
+var path = require('path');
 
-function checkInputLength(){}
+function checkInputLength(input, expectedLength , errorCallback){
+    if(input.length == expectedLength ) {
+        return true
+    }
+    else {
+        errorCallback();
+    }
+}
 
-function checkInputDataType(){}
+function checkInputDataType(input , expectedType , errorCallback){
+    if(typeof input == typeof expectedType){
+        return true
+    }
+    else{
+        errorCallback();
+    }
+}
 
 
-function checkFileType(){}
+function checkFileType(filePath, expectedFileType ){
+    var ext = path.extname(filePath).toLowerCase();
+    var providedFileType = expectedFileType.toLowerCase();
+    if(providedFileType == ext){
+        return true;
+    }
+    else{
+        // returns extension name of file for error handling
+        return ext;
+    }
+}
 
-
-function checkFileSize(){}
+function checkFileSize(filePath,expectedFileSize){
+    fs.stat(filePath, (err,stats)=>{
+        if(err){
+            return "error processing file"
+        }
+        // returns file size in MegaByte
+        return stats.size/1024*1024
+    })
+    
+}
 
 
 function checkEmail(){}
